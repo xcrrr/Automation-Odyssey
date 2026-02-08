@@ -1,0 +1,7 @@
+{
+  "name": "Automation Odyssey",
+  "description": "Jednostronicowa strona lądowania dla usług AI voice botów i chatbotów z nowoczesnym designem dark mode.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
