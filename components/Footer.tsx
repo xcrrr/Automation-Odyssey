@@ -19,23 +19,23 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer id="contact" className="bg-dark pt-24 md:pt-32 pb-8">
+    <footer id="contact" className="bg-dark pt-24 md:pt-32 pb-8 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12 text-center md:text-left">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 mb-16 text-left">
           
           {/* Brand */}
-          <div className="col-span-1 md:col-span-1 flex flex-col items-center md:items-start">
-            <div className="flex items-center gap-2 mb-4">
-              <Compass className="h-6 w-6 text-primary" />
+          <div className="col-span-2 md:col-span-1 flex flex-col items-start">
+            <div className="flex items-center gap-2 mb-4 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <Compass className="h-6 w-6 text-primary group-hover:rotate-45 transition-transform duration-500" />
               <span className="font-heading font-bold text-xl text-white">Automation Odyssey</span>
             </div>
-            <p className="text-gray-400 text-sm mb-6 max-w-xs mx-auto md:mx-0">
+            <p className="text-gray-400 text-sm mb-6 max-w-xs">
               Rewolucjonizujemy komunikację biznesową dzięki inteligentnym botom głosowym i chatbotom.
             </p>
             <div className="flex space-x-4">
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><Twitter size={20} /></a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><Linkedin size={20} /></a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><Facebook size={20} /></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 text-gray-400 hover:text-primary hover:bg-white/10 transition-all"><Twitter size={18} /></a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 text-gray-400 hover:text-primary hover:bg-white/10 transition-all"><Linkedin size={18} /></a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 text-gray-400 hover:text-primary hover:bg-white/10 transition-all"><Facebook size={18} /></a>
             </div>
           </div>
 
@@ -43,10 +43,10 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-bold mb-4">Firma</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#features" className="hover:text-primary transition-colors">O nas</a></li>
-              <li><a href="#how-it-works" className="hover:text-primary transition-colors">Jak to działa</a></li>
-              <li><a href="#faq" className="hover:text-primary transition-colors">FAQ</a></li>
-              <li><a href="#contact" className="hover:text-primary transition-colors">Kontakt</a></li>
+              <li><a href="#features" onClick={(e) => { e.preventDefault(); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-primary transition-colors cursor-pointer">O nas</a></li>
+              <li><a href="#how-it-works" onClick={(e) => { e.preventDefault(); document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-primary transition-colors cursor-pointer">Jak to działa</a></li>
+              <li><a href="#faq" onClick={(e) => { e.preventDefault(); document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-primary transition-colors cursor-pointer">FAQ</a></li>
+              <li><a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-primary transition-colors cursor-pointer">Kontakt</a></li>
             </ul>
           </div>
 
@@ -54,22 +54,26 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-bold mb-4">Prawne</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#" onClick={preventDefault} className="hover:text-primary transition-colors cursor-pointer">Polityka Prywatności</a></li>
-              <li><a href="#" onClick={preventDefault} className="hover:text-primary transition-colors cursor-pointer">Regulamin</a></li>
-              <li><a href="#" onClick={preventDefault} className="hover:text-primary transition-colors cursor-pointer">RODO</a></li>
+              <li><button onClick={() => alert('Polityka Prywatności w przygotowaniu')} className="hover:text-primary transition-colors cursor-pointer">Polityka Prywatności</button></li>
+              <li><button onClick={() => alert('Regulamin w przygotowaniu')} className="hover:text-primary transition-colors cursor-pointer">Regulamin</button></li>
+              <li><button onClick={() => alert('RODO w przygotowaniu')} className="hover:text-primary transition-colors cursor-pointer">RODO</button></li>
             </ul>
           </div>
 
           {/* Contact/Newsletter */}
-          <div className="flex flex-col items-center md:items-start">
+          <div className="col-span-2 md:col-span-1 flex flex-col items-start">
             <h4 className="text-white font-bold mb-4">Kontakt</h4>
-            <ul className="space-y-3 text-sm text-gray-400 mb-6 w-full max-w-xs md:max-w-none">
-              <li className="flex items-center justify-center md:justify-start gap-2 group">
-                <Mail size={16} className="text-primary group-hover:text-white transition-colors" />
+            <ul className="space-y-3 text-sm text-gray-400 mb-6 w-full">
+              <li className="flex items-center gap-3 group">
+                <div className="p-2 rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                  <Mail size={14} />
+                </div>
                 <a href="mailto:kontakt@automationodyssey.pl" className="hover:text-white transition-colors">kontakt@automationodyssey.pl</a>
               </li>
-              <li className="flex items-center justify-center md:justify-start gap-2 group">
-                <Phone size={16} className="text-primary group-hover:text-white transition-colors" />
+              <li className="flex items-center gap-3 group">
+                <div className="p-2 rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                  <Phone size={14} />
+                </div>
                 <a href="tel:+48573920727" className="hover:text-white transition-colors">+48 573 920 727</a>
               </li>
             </ul>
