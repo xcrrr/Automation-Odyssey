@@ -60,7 +60,7 @@ export const ChatWidget: React.FC = () => {
   const ConvaiWidget = 'elevenlabs-convai' as any;
 
   return (
-    <div className="fixed bottom-6 right-6 z-[100]">
+    <div className="hidden md:block fixed bottom-6 right-6 z-[100]">
       <ConvaiWidget agent-id="agent_3501kdv292srfvrvjy3qx9v34409"></ConvaiWidget>
     </div>
   );
