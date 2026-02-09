@@ -29,7 +29,7 @@ export const PrivacyPolicy: React.FC = () => (
     <div className="space-y-6 text-gray-300">
       <section>
         <h2 className="text-xl font-bold text-white mb-3">1. Informacje ogólne</h2>
-        <p>Właścicielem serwisu automationodyssey.pl oraz Administratorem Danych Osobowych jest Adam Parszewski, działający w ramach modelu inkubacji biznesowej (wsparcie prawne: Rodzice / Opiekunowie Prawni). Kontakt: kontakt@automationodyssey.pl.</p>
+        <p>Właścicielem serwisu automationodyssey.pl oraz Administratorem Danych Osobowych jest Adam Parszewski, działający w ramach modelu inkubacji biznesowej (wsparcie prawne: Rodzice / Opiekunowie Prawni). Kontakt: automationodyssey@gmail.com.</p>
       </section>
       <section>
         <h2 className="text-xl font-bold text-white mb-3">2. Jakie dane zbieramy?</h2>

@@ -68,13 +68,13 @@ export const Footer: React.FC = () => {
                 <div className="p-2 rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
                   <Mail size={14} />
                 </div>
-                <a href="mailto:kontakt@automationodyssey.pl" className="hover:text-white transition-colors">kontakt@automationodyssey.pl</a>
+                <a href="mailto:automationodyssey@gmail.com" className="hover:text-white transition-colors">automationodyssey@gmail.com</a>
               </li>
               <li className="flex items-center gap-3 group">
                 <div className="p-2 rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
                   <Phone size={14} />
                 </div>
-                <a href="tel:+48573920727" className="hover:text-white transition-colors">+48 573 920 727</a>
+                <a href="tel:+48729086144" className="hover:text-white transition-colors">+48 729 086 144</a>
               </li>
             </ul>
             <form onSubmit={handleSubscribe} className="relative w-full max-w-xs md:max-w-none">
