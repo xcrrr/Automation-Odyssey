@@ -110,7 +110,7 @@ export const Hero: React.FC = () => {
             <span className="inline-block animate-reveal" style={{ animationDelay: '200ms' }}>Która</span>{" "}
             <span className="inline-block animate-reveal" style={{ animationDelay: '300ms' }}>Uwalnia</span>{" "}
             <span className="inline-block animate-reveal" style={{ animationDelay: '700ms' }}>
-               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">Czas</span>
+               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Czas</span>
             </span>
           </h1>
           <p className="text-base md:text-xl text-gray-400 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed animate-reveal px-2 md:px-0 font-light" style={{ animationDelay: '800ms' }}>
