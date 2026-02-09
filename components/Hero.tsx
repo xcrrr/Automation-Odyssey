@@ -85,6 +85,14 @@ export const Hero: React.FC = () => {
       {/* Grid Pattern Overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
 
+      {/* Floating particles or "Stars" */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[20%] left-[10%] w-1 h-1 bg-white rounded-full animate-pulse opacity-20"></div>
+        <div className="absolute top-[60%] left-[15%] w-1.5 h-1.5 bg-primary rounded-full animate-float opacity-30" style={{ animationDuration: '4s' }}></div>
+        <div className="absolute top-[30%] right-[15%] w-1 h-1 bg-secondary rounded-full animate-pulse opacity-40" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-[20%] right-[10%] w-2 h-2 bg-primary/40 rounded-full animate-float opacity-20" style={{ animationDuration: '7s' }}></div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center gap-12 md:gap-16">
         {/* Text Content */}
         <div className="w-full md:w-5/12 text-center md:text-left relative z-20">

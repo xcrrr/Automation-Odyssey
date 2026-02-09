@@ -50,26 +50,34 @@ export const FAQ: React.FC = () => {
           {faqs.map((faq, index) => (
             <div 
               key={index} 
-              className="border border-gray-700 rounded-xl bg-dark overflow-hidden transition-all duration-300 hover:border-gray-500 shadow-md"
+              className={`border rounded-xl transition-all duration-500 bg-dark group ${
+                openIndex === index 
+                  ? 'border-primary/50 shadow-[0_0_25px_rgba(0,212,255,0.1)]' 
+                  : 'border-white/5 hover:border-white/20'
+              }`}
             >
               <button
                 type="button"
                 className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
                 onClick={() => toggleFAQ(index)}
               >
-                <span className="text-lg font-medium text-white">{faq.question}</span>
-                {openIndex === index ? (
-                  <Minus className="h-5 w-5 text-primary shrink-0 transition-transform duration-300" />
-                ) : (
-                  <Plus className="h-5 w-5 text-gray-400 shrink-0 transition-transform duration-300" />
-                )}
+                <span className={`text-lg font-medium transition-colors duration-300 ${openIndex === index ? 'text-primary' : 'text-white'}`}>
+                  {faq.question}
+                </span>
+                <div className={`p-2 rounded-lg transition-all duration-300 ${openIndex === index ? 'bg-primary/10 rotate-180' : 'bg-white/5'}`}>
+                  {openIndex === index ? (
+                    <Minus className="h-5 w-5 text-primary" />
+                  ) : (
+                    <Plus className="h-5 w-5 text-gray-400 group-hover:text-white" />
+                  )}
+                </div>
               </button>
               <div 
-                className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                  openIndex === index ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+                className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                  openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >
-                <div className="px-6 pb-5 text-gray-400">
+                <div className="px-6 pb-6 text-gray-400 leading-relaxed border-t border-white/5 pt-4">
                   {faq.answer}
                 </div>
               </div>

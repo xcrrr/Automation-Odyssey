@@ -99,11 +99,36 @@
       
       .glass-card {
         background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
       }
       .perspective-1000 {
         perspective: 1000px;
+      }
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0f0f1e;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1a1a2e;
+        border-radius: 5px;
+        border: 2px solid #0f0f1e;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #00d4ff;
+      }
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: linear-gradient(to right, #00d4ff, #6366f1);
+        z-index: 100;
+        transition: width 0.1s ease-out;
       }
     </style>
 <!-- Cal element-click embed code begins -->
@@ -135,7 +160,16 @@
 <link rel="stylesheet" href="/index.css">
 </head>
   <body>
+    <div id="scroll-progress"></div>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
+    <script>
+      window.onscroll = function() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("scroll-progress").style.width = scrolled + "%";
+      };
+    </script>
   </body>
 </html>
