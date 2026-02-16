@@ -8,6 +8,8 @@ import { Footer } from './components/Footer';
 import { ChatWidget } from './components/ChatWidget';
 import { PrivacyPolicy, TermsOfService } from './components/Legal';
 
+import { CelestialBackground } from './components/CelestialBackground';
+
 function App() {
   const [view, setView] = useState<'home' | 'privacy' | 'terms'>('home');
 
@@ -30,8 +32,9 @@ function App() {
 
   return (
     <div className="font-sans antialiased text-white bg-dark selection:bg-primary selection:text-dark relative">
+      <CelestialBackground />
       <Header />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <Features />
         <HowItWorks />

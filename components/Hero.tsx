@@ -4,13 +4,24 @@ import { WavyDivider } from './WavyDivider';
 
 export const Hero: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ 
+        x: (e.clientX / window.innerWidth - 0.5) * 40, 
+        y: (e.clientY / window.innerHeight - 0.5) * 40 
+      });
+    };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   const handleBookingClick = () => {
@@ -174,6 +185,10 @@ export const Hero: React.FC = () => {
               <div className="absolute inset-0 m-auto w-[70%] h-[70%] rounded-full border border-secondary/10 animate-[spin_40s_linear_infinite_reverse] will-change-transform"></div>
               <div className="absolute inset-0 m-auto w-[70%] h-[70%] rounded-full border-b-2 border-l-2 border-secondary/30 animate-[spin_40s_linear_infinite_reverse] opacity-50 will-change-transform"></div>
 
+              {/* Neural Pulse Waves */}
+              <div className="absolute inset-0 m-auto w-40 h-40 bg-primary/20 rounded-full animate-ping opacity-20"></div>
+              <div className="absolute inset-0 m-auto w-60 h-60 bg-secondary/10 rounded-full animate-ping opacity-10" style={{ animationDelay: '1s' }}></div>
+
               {/* Inner Energy Field */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-secondary/20 rounded-full blur-[90px] animate-pulse-slow"></div>
               
@@ -187,15 +202,25 @@ export const Hero: React.FC = () => {
                   <div className="absolute inset-0 rounded-full border-t-2 border-primary/60 animate-[spin_3s_linear_infinite] will-change-transform"></div>
                   <div className="absolute inset-2 rounded-full border-r-2 border-secondary/60 animate-[spin_5s_linear_infinite_reverse] will-change-transform"></div>
                   
+                  {/* Core Bioluminescence */}
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,212,255,0.2),transparent_70%)] animate-pulse"></div>
+
                   {/* Center Icon */}
-                  <div className="relative z-20 bg-dark-lighter p-4 rounded-full border border-white/10 shadow-lg">
+                  <div className="relative z-20 bg-dark-lighter p-4 rounded-full border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500">
                     <Bot className="w-16 h-16 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]" />
                   </div>
               </div>
 
               {/* Floating Status Cards (Desktop Only) */}
               {benefits.map((item, idx) => (
-                <div key={idx} className="absolute z-20" style={item.positionStyle}>
+                <div 
+                  key={idx} 
+                  className="absolute z-20 transition-transform duration-500 ease-out" 
+                  style={{ 
+                    ...item.positionStyle,
+                    transform: `translate3d(${mousePos.x * (idx + 1) * 0.2}px, ${mousePos.y * (idx + 1) * 0.2}px, 0)` 
+                  }}
+                >
                     <div className="animate-float" style={{ animationDelay: item.delay }}>
                         <div className="relative p-4 bg-dark-lighter/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl hover:border-primary/50 hover:shadow-[0_0_20px_rgba(0,212,255,0.2)] transition-all duration-300 group">
                              {/* Connector Line */}
