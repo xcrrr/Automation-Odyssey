@@ -48,22 +48,18 @@
               heading: ['Poppins', 'sans-serif'],
             },
             colors: {
-              dark: '#0f0f1e',
-              'dark-lighter': '#1a1a2e',
-              primary: '#00d4ff', // Cyan/Aqua
-              secondary: '#6366f1', // Indigo/Purple
+              dark: '#020202',
+              primary: '#00d4ff',
+              secondary: '#6366f1',
               accent: '#ff006e',
             },
             transitionTimingFunction: {
-              'luxury': 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+              'luxury': 'cubic-bezier(0.16, 1, 0.3, 1)',
             },
             animation: {
               'float': 'float 6s ease-in-out infinite',
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'shine': 'shine 4s linear infinite',
-              'waveform': 'waveform 1.2s ease-in-out infinite',
-              'spin-slow': 'spin 12s linear infinite',
-              'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+              'scan': 'scan 4s ease-in-out infinite',
             },
             keyframes: {
               float: {
@@ -73,14 +69,6 @@
               shine: {
                 '0%': { backgroundPosition: '200% center' },
                 '100%': { backgroundPosition: '-200% center' },
-              },
-              waveform: {
-                '0%, 100%': { height: '10px', opacity: '0.5' },
-                '50%': { height: '24px', opacity: '1' },
-              },
-              fadeInUp: {
-                '0%': { opacity: '0', transform: 'translateY(30px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
               },
               scan: {
                 '0%': { top: '0%', opacity: '0' },
@@ -93,161 +81,76 @@
       }
     </script>
     <style>
-      html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 100px;
-      }
+      html { scroll-behavior: smooth; scroll-padding-top: 100px; }
       body {
-        background-color: #030303;
+        background-color: #020202;
         color: #ffffff;
         overflow-x: hidden;
-        /* Custom noise texture overlay for high-end feel */
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
       }
-      
-      /* Smooth Mesh Gradient Background */
-      .mesh-gradient {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        background: 
-          radial-gradient(at 0% 0%, hsla(190,100%,20%,0.15) 0, transparent 50%), 
-          radial-gradient(at 100% 100%, hsla(240,100%,15%,0.15) 0, transparent 50%),
-          radial-gradient(at 50% 50%, hsla(330,100%,10%,0.05) 0, transparent 50%);
-        filter: blur(100px);
-        animation: meshMove 20s ease-in-out infinite alternate;
-      }
-      
-      @keyframes meshMove {
-        0% { transform: scale(1) translate(0, 0); }
-        100% { transform: scale(1.1) translate(-2%, -2%); }
-      }
-
       .gradient-text {
-        background: linear-gradient(135deg, #00d4ff 0%, #ffffff 50%, #6366f1 100%);
+        background: linear-gradient(135deg, #fff 0%, #00d4ff 50%, #6366f1 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-size: 200% auto;
         animation: shine 8s ease infinite;
       }
-      .animate-text-shine {
-        background: linear-gradient(to right, #ffffff 20%, #00d4ff 40%, #ffffff 60%, #ffffff 80%);
-        background-size: 200% auto;
-        color: #000;
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: shine 4s linear infinite;
-      }
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: #000; }
+      ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
       
-      /* Luxury Scrollbar */
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0f0f1e;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: linear-gradient(to bottom, #00d4ff, #6366f1);
-        border-radius: 10px;
-      }
-
-      .glass-card {
-        background: rgba(255, 255, 255, 0.02);
-        backdrop-filter: blur(20px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-      }
-      
-      /* Nano-Banana Smoothness */
-      .ease-luxury {
-        transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-      }
-
-      @keyframes scan {
-        0% { transform: translateY(-100%); opacity: 0; }
-        50% { opacity: 1; }
-        100% { transform: translateY(100%); opacity: 0; }
-      }
-      
-      /* Advanced Hover State for Cards */
-      .card-hover-effect {
+      .btn-luxury {
         position: relative;
+        background: #ffffff;
+        color: #000;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 1.25rem 2.5rem;
+        border-radius: 9999px;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         overflow: hidden;
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
       }
-      .card-hover-effect::after {
+      .btn-luxury:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+      }
+      .btn-luxury::after {
         content: '';
         position: absolute;
         inset: 0;
-        background: radial-gradient(600px circle at var(--x) var(--y), rgba(0, 212, 255, 0.1), transparent 40%);
-        opacity: 0;
-        transition: opacity 0.3s;
-        pointer-events: none;
+        background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.8s ease;
       }
-      .card-hover-effect:hover::after {
-        opacity: 1;
-      }
-      /* Mobile Adjustments */
+      .btn-luxury:hover::after { transform: translateX(100%); }
+
       @media (max-width: 768px) {
-        html {
-          scroll-padding-top: 80px;
-        }
-        section {
-          padding-top: 60px !important;
-          padding-bottom: 60px !important;
-        }
-        h1 {
-          font-size: 3.5rem !important;
-          line-height: 1 !important;
-        }
-        h2 {
-          font-size: 2.2rem !important;
-          line-height: 1.1 !important;
-        }
+        html { scroll-padding-top: 80px; }
+        h1 { font-size: 2.8rem !important; line-height: 1 !important; }
+        h2 { font-size: 2.2rem !important; }
+        section { padding-top: 80px !important; padding-bottom: 80px !important; }
       }
     </style>
-<!-- Cal element-click embed code begins -->
 <script type="text/javascript">
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
   Cal("init", "konsultacja-ai", {origin:"https://app.cal.com"});
-
-  
-  // Important: Please add the following attributes to the element that should trigger the calendar to open upon clicking.
-  // `data-cal-link="automationodyssey.pl/konsultacja-ai"`
-  // data-cal-namespace="konsultacja-ai"
-  // `data-cal-config='{"layout":"month_view","theme":"dark"}'`
-
   Cal.ns["konsultacja-ai"]("ui", {"theme":"dark","cssVarsPerTheme":{"light":{"cal-brand":"#292929"},"dark":{"cal-brand":"#ffffff"}},"hideEventTypeDetails":false,"layout":"month_view"});
   </script>
-  <!-- Cal element-click embed code ends -->
 <script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "vite": "https://esm.sh/vite@^7.3.1",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+    "react": "https://esm.sh/react@^18.3.1",
+    "react-dom/": "https://esm.sh/react-dom@^18.3.1/",
+    "react/": "https://esm.sh/react@^18.3.1/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.344.0"
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
   <body>
-    <div id="scroll-progress"></div>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
-    <script>
-      window.onscroll = function() {
-        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        var scrolled = (winScroll / height) * 100;
-        document.getElementById("scroll-progress").style.width = scrolled + "%";
-      };
-    </script>
   </body>
 </html>
