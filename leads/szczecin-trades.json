@@ -1,0 +1,65 @@
+[
+  {
+    "company": "Twój Dach nad Głową Tomasz Kusiak",
+    "industry": "Roofing",
+    "address": "ul. Rostocka 121/2, 71-771 Szczecin",
+    "contact_status": "PENDING_LEGAL",
+    "notes": "Firma od 2021, lokalna."
+  },
+  {
+    "company": "Z.R.B. Dekarz Piotr Ziółkowski",
+    "industry": "Roofing",
+    "address": "ul. Chłopska 15, 70-781 Szczecin",
+    "contact_status": "PENDING_LEGAL",
+    "notes": "Firma od 2013, nacisk na staranność."
+  },
+  {
+    "company": "Szczyt Sp. z o.o.",
+    "industry": "Roofing",
+    "address": "gen. Sowińskiego 74A/9, 70-236 Szczecin",
+    "contact_status": "PENDING_LEGAL",
+    "notes": "Wieloletnie doświadczenie, dachy skomplikowane."
+  },
+  {
+    "company": "Veldach Niemcewicza Sp. z o.o.",
+    "industry": "Roofing",
+    "address": "ul. Niemcewicza 9, 71-553 Szczecin",
+    "contact_status": "PENDING_LEGAL",
+    "notes": "Działalność od 198x, bardzo stabilna firma."
+  },
+  {
+    "company": "Leman Marcin Blacharstwo Budowlane",
+    "industry": "Roofing/Blacharstwo",
+    "address": "ul. Wierzbowa 46 /23, 71-025 Szczecin",
+    "contact_status": "PENDING_LEGAL",
+    "notes": "Specjalizacja w blacharstwie."
+  },
+  {
+    "company": "DS Klimatyzacje Daniel Spychała",
+    "industry": "HVAC",
+    "address": "ul. Zwierzyniecka 24/2, 70-794 Szczecin",
+    "contact_status": "PENDING_LEGAL",
+    "notes": "Eksperci od chłodzenia, mieszkania i przemysł."
+  },
+  {
+    "company": "Thermo Technica sp. z o.o.",
+    "industry": "HVAC/Chłodnictwo",
+    "address": "ul. Jesienna 4, 70-807 Szczecin",
+    "contact_status": "PENDING_LEGAL",
+    "notes": "Klimatyzacja samochodowa i przemysłowa."
+  },
+  {
+    "company": "Instalacje Wodno-Kanalizacyjne i Gazowe Andrzej Giedrys",
+    "industry": "Plumbing/HVAC",
+    "address": "ul. Jarząbków 34, 70-886 Szczecin",
+    "contact_status": "PENDING_LEGAL",
+    "notes": "Kompleksowe instalacje, gaz, woda, klimatyzacja."
+  },
+  {
+    "company": "Calesco S.A.",
+    "industry": "HVAC/Ogrzewanie",
+    "address": "ul. Tczewska 32, 70-850 Szczecin",
+    "contact_status": "PENDING_LEGAL",
+    "notes": "Duża firma, instalacje przemysłowe, pompy ciepła."
+  }
+]
