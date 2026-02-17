@@ -87,89 +87,61 @@
     <style>
       html { scroll-behavior: smooth; scroll-padding-top: 100px; }
       body {
-        background-color: #020202;
+        background-color: #000000;
         color: #ffffff;
         overflow-x: hidden;
-        cursor: default;
+        font-family: 'Inter', sans-serif;
       }
       
-      /* Smooth Scroll & Selection */
-      html { scroll-behavior: smooth; }
-      ::selection { background: rgba(0, 212, 255, 0.3); color: #fff; }
-
-      /* Custom Cursor Element (Optional, but high-end) */
-      .custom-cursor {
-        width: 20px;
-        height: 20px;
-        background: white;
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 10000;
-        mix-blend-mode: difference;
-        transition: transform 0.15s ease-out;
+      /* Pure Luxury Aesthetics */
+      .gradient-text {
+        background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.2) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
 
-      /* Noise & Atmosphere */
+      .btn-luxury {
+        background: white;
+        color: black;
+        padding: 1.5rem 4rem;
+        border-radius: 0; /* Industrial Square look for luxury */
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-size: 0.75rem;
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        border: 1px solid white;
+      }
+      .btn-luxury:hover {
+        background: transparent;
+        color: white;
+        transform: translateY(-2px);
+        letter-spacing: 0.3em;
+      }
+      
+      /* Subtle Grain Overlay */
       body::before {
         content: "";
         position: fixed;
         inset: 0;
-        z-index: 999;
+        z-index: 9999;
         pointer-events: none;
-        opacity: 0.04;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        opacity: 0.05;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       }
 
-      .gradient-text {
-        background: linear-gradient(to right, #fff 20%, #00d4ff 40%, #6366f1 60%, #fff 80%);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: shine 10s linear infinite;
+      h1, h2 { 
+        letter-spacing: -0.06em !important; 
+        line-height: 0.8 !important;
+        text-transform: uppercase;
       }
-      
-      @keyframes shine {
-        to { background-position: 200% center; }
-      }
-
-      .btn-luxury {
-        position: relative;
-        background: #ffffff;
-        color: #000;
-        font-weight: 700;
-        text-transform: none;
-        letter-spacing: -0.01em;
-        padding: 1.5rem 3.5rem;
-        border-radius: 9999px;
-        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        overflow: hidden;
-        box-shadow: 0 10px 40px rgba(255, 255, 255, 0.15);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid white;
-      }
-      .btn-luxury:hover {
-        transform: translateY(-5px) scale(1.02);
-        background: transparent;
-        color: white;
-        box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
-      }
-      
-      /* Luxury Scrollbar */
-      ::-webkit-scrollbar { width: 5px; }
-      ::-webkit-scrollbar-track { background: #020202; }
-      ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
-      ::-webkit-scrollbar-thumb:hover { background: #333; }
-
-      h1, h2 { letter-spacing: -0.05em !important; }
     </style>
 <script type="text/javascript">
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
   Cal("init", "konsultacja-ai", {origin:"https://app.cal.com"});
   Cal.ns["konsultacja-ai"]("ui", {"theme":"dark","cssVarsPerTheme":{"light":{"cal-brand":"#292929"},"dark":{"cal-brand":"#ffffff"}},"hideEventTypeDetails":false,"layout":"month_view"});
   </script>
+
 
 
 
@@ -185,7 +157,7 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-DgFjHpuG.js"></script>
+  <script type="module" crossorigin src="/assets/index-DjkLav-t.js"></script>
 </head>
   <body>
     <div id="root"></div>

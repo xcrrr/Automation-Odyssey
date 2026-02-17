@@ -6,170 +6,97 @@ export const QuantumCore: React.FC = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d', { alpha: true });
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let width = canvas.width = 600;
-    let height = canvas.height = 600;
-    let particles: Particle[] = [];
-    let strings: NeuralString[] = [];
-    let mouse = { x: -1000, y: -1000, active: false };
+    let width = canvas.width = 800;
+    let height = canvas.height = 800;
+    let time = 0;
 
-    window.addEventListener('mousemove', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = (e.clientX - rect.left) * (width / rect.width);
-      mouse.y = (e.clientY - rect.top) * (height / rect.height);
-      mouse.active = true;
-    });
-
-    class Particle {
-      x: number; y: number; z: number; r: number; color: string; 
-      angle: number; orbit: number; speed: number;
-      
-      constructor() {
-        this.reset();
-      }
-
-      reset() {
-        this.orbit = Math.random() * 180 + 40;
-        this.angle = Math.random() * Math.PI * 2;
-        this.z = Math.random() * 200 - 100;
-        this.speed = (Math.random() * 0.005 + 0.002) * (Math.random() > 0.5 ? 1 : -1);
-        this.r = Math.random() * 1.5 + 0.5;
-        this.color = Math.random() > 0.7 ? '#00d4ff' : '#6366f1';
-      }
-
-      update() {
-        this.angle += this.speed;
-        
-        // Target positions in 3D-like space
-        let tx = width / 2 + Math.cos(this.angle) * this.orbit;
-        let ty = height / 2 + Math.sin(this.angle) * this.orbit * 0.5;
-        
-        // Gravitational pull to mouse
-        if (mouse.active) {
-          const dx = mouse.x - tx;
-          const dy = mouse.y - ty;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 150) {
-            tx += dx * (1 - dist / 150) * 0.5;
-            ty += dy * (1 - dist / 150) * 0.5;
-          }
-        }
-
-        this.x = tx;
-        this.y = ty;
-      }
-
-      draw() {
-        if (!ctx) return;
-        const scale = (this.z + 100) / 200;
-        const opacity = Math.max(0.1, scale);
-        
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r * scale, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = opacity;
-        ctx.fill();
-        
-        if (scale > 0.8) {
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = this.color;
-        }
-      }
-    }
-
-    class NeuralString {
-        points: {x: number, y: number}[] = [];
-        constructor() {
-            for(let i=0; i<10; i++) {
-                this.points.push({x: width/2, y: height/2});
-            }
-        }
-        update(targetX: number, targetY: number) {
-            this.points[0].x = targetX;
-            this.points[0].y = targetY;
-            for(let i=1; i<this.points.length; i++) {
-                this.points[i].x += (this.points[i-1].x - this.points[i].x) * 0.3;
-                this.points[i].y += (this.points[i-1].y - this.points[i].y) * 0.3;
-            }
-        }
-        draw() {
-            if(!ctx) return;
-            ctx.beginPath();
-            ctx.moveTo(this.points[0].x, this.points[0].y);
-            for(let i=1; i<this.points.length; i++) {
-                ctx.lineTo(this.points[i].x, this.points[i].y);
-            }
-            ctx.strokeStyle = 'rgba(0, 212, 255, 0.05)';
-            ctx.stroke();
-        }
-    }
-
-    for (let i = 0; i < 200; i++) particles.push(new Particle());
-    for (let i = 0; i < 5; i++) strings.push(new NeuralString());
-
-    const animate = () => {
+    const draw = () => {
       ctx.clearRect(0, 0, width, height);
-      
-      // Central "Singularity" Glow
-      const time = Date.now() * 0.001;
-      const pulse = Math.sin(time) * 10 + 90;
-      
-      const gradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, pulse);
-      gradient.addColorStop(0, 'rgba(255, 255, 255, 0.15)');
-      gradient.addColorStop(0.3, 'rgba(0, 212, 255, 0.05)');
-      gradient.addColorStop(0.6, 'rgba(99, 102, 241, 0.02)');
-      gradient.addColorStop(1, 'transparent');
-      
-      ctx.globalAlpha = 1;
-      ctx.fillStyle = gradient;
-      ctx.beginPath();
-      ctx.arc(width/2, height/2, pulse, 0, Math.PI * 2);
-      ctx.fill();
+      time += 0.005;
 
-      // Draw Atmospheric Rings
-      ctx.strokeStyle = 'rgba(255,255,255,0.02)';
+      const centerX = width / 2;
+      const centerY = height / 2;
+
+      // 1. Aura / Deep Glow
+      const aura = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 300);
+      aura.addColorStop(0, 'rgba(0, 212, 255, 0.05)');
+      aura.addColorStop(1, 'transparent');
+      ctx.fillStyle = aura;
+      ctx.fillRect(0, 0, width, height);
+
+      // 2. The Glass Sphere (Lensed Effect)
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 150, 0, Math.PI * 2);
+      ctx.clip();
+
+      // Draw distorted "inside"
+      for (let i = 0; i < 3; i++) {
+        const offset = i * 20;
+        ctx.beginPath();
+        ctx.ellipse(
+          centerX + Math.cos(time + i) * 30, 
+          centerY + Math.sin(time * 0.8 + i) * 30,
+          100 + Math.sin(time) * 20, 
+          250, 
+          time * 0.2 + i, 
+          0, Math.PI * 2
+        );
+        ctx.strokeStyle = i === 0 ? 'rgba(0, 212, 255, 0.3)' : 'rgba(99, 102, 241, 0.2)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // 3. The Rim Light (Luksusowa krawędź)
+      const rim = ctx.createRadialGradient(centerX - 50, centerY - 50, 100, centerX, centerY, 150);
+      rim.addColorStop(0, 'rgba(255, 255, 255, 0.2)');
+      rim.addColorStop(0.5, 'rgba(255, 255, 255, 0.05)');
+      rim.addColorStop(1, 'rgba(255, 255, 255, 0.1)');
+      
+      ctx.strokeStyle = rim;
       ctx.lineWidth = 1;
-      for(let i=1; i<=3; i++) {
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 150, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // 4. Floating Data Shards
+      for(let i=0; i<15; i++) {
+          const angle = time + i * (Math.PI * 2 / 15);
+          const x = centerX + Math.cos(angle) * (180 + Math.sin(time + i) * 20);
+          const y = centerY + Math.sin(angle) * (180 + Math.cos(time + i) * 20);
+          
+          ctx.fillStyle = 'rgba(255,255,255,0.4)';
           ctx.beginPath();
-          ctx.ellipse(width/2, height/2, pulse * i * 0.8, pulse * i * 0.4, time * 0.2 * i, 0, Math.PI * 2);
-          ctx.stroke();
+          ctx.arc(x, y, 0.8, 0, Math.PI * 2);
+          ctx.fill();
       }
 
-      particles.forEach((p, i) => {
-        p.update();
-        p.draw();
-        if(i < 5) {
-            strings[i].update(p.x, p.y);
-            strings[i].draw();
-        }
-      });
-
-      requestAnimationFrame(animate);
+      requestAnimationFrame(draw);
     };
 
-    animate();
+    draw();
   }, []);
 
   return (
-    <div className="relative flex items-center justify-center">
-       {/* High-End Glass Backdrop */}
-       <div className="absolute w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,rgba(0,212,255,0.03),transparent_70%)] pointer-events-none"></div>
+    <div className="relative flex items-center justify-center group">
+       {/* Blurred organic shadow */}
+       <div className="absolute w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px] mix-blend-screen animate-pulse"></div>
        
        <canvas 
         ref={canvasRef} 
-        width={600} 
-        height={600} 
-        className="relative z-10 w-full h-full max-w-[600px] max-h-[600px] mix-blend-screen opacity-80"
+        width={800} 
+        height={800} 
+        className="relative z-10 w-[300px] h-[300px] md:w-[550px] md:h-[550px] transition-transform duration-1000 ease-luxury group-hover:scale-105"
        />
-
-       {/* Floating UI Indicators */}
-       <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-0 w-32 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-          <div className="absolute bottom-1/4 right-0 w-32 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-          
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full border border-white/[0.02] rounded-full animate-[spin_60s_linear_infinite]"></div>
+       
+       {/* HUD Labels */}
+       <div className="absolute inset-0 pointer-events-none font-mono text-[10px] tracking-[0.3em] text-white/20 uppercase">
+          <div className="absolute top-1/4 left-0 -rotate-90">Core.Intelligence</div>
+          <div className="absolute bottom-1/4 right-0 rotate-90">Odyssey.System</div>
        </div>
     </div>
   );
