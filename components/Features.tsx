@@ -2,62 +2,72 @@ import React, { useState, useRef } from 'react';
 import { Bot, Zap, Target, BarChart3, ChevronRight } from 'lucide-react';
 
 const BentoCard = ({ icon: Icon, title, description, className = "" }: { icon: any, title: string, description: string, className?: string }) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
   return (
     <div
-      className={`relative group bg-[#000] border border-white/5 p-12 overflow-hidden transition-all duration-1000 ease-luxury hover:border-white/20 ${className}`}
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      className={`relative group bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-10 overflow-hidden transition-all duration-700 ease-luxury hover:bg-white/[0.05] hover:border-white/10 ${className}`}
     >
-      <div className="relative z-10 h-full flex flex-col justify-between">
-        <div>
-            <div className="text-white/20 mb-12 group-hover:text-primary transition-colors duration-700">
-              <Icon size={40} strokeWidth={1} />
-            </div>
-            <h3 className="text-4xl font-bold mb-6 tracking-tighter text-white uppercase">{title}</h3>
-            <p className="text-white/30 leading-relaxed text-xl font-light max-w-sm">{description}</p>
-        </div>
-        
-        <div className="mt-16 flex items-center gap-4 text-white/10 group-hover:text-white transition-all duration-700">
-           <div className="w-12 h-px bg-white/10 group-hover:w-20 group-hover:bg-white transition-all"></div>
-           <span className="text-[10px] font-bold uppercase tracking-[0.4em]">Detail Analysis</span>
-        </div>
-      </div>
+      <div
+        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(0, 212, 255, 0.1), transparent 40%)`,
+        }}
+      />
       
-      {/* Background Gradient on Hover */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+      <div className="relative z-10">
+        <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/5 group-hover:scale-110 transition-transform duration-700">
+          <Icon className="text-primary" size={28} />
+        </div>
+        <h3 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight text-white">{title}</h3>
+        <p className="text-white/40 leading-relaxed text-lg font-light">{description}</p>
+      </div>
     </div>
   );
 };
 
 export const Features: React.FC = () => {
   return (
-    <section id="features" className="py-48 md:py-64 px-6 bg-[#020205] relative overflow-hidden border-t border-white/5">
+    <section id="features" className="py-32 px-6 bg-[#020205] relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-32">
-          <h2 className="text-7xl md:text-[12rem] font-black mb-12 tracking-tighter leading-[0.8] text-white">
-            CORE<br />
-            <span className="text-white/5">SOLUTIONS.</span>
+        <div className="mb-24">
+          <h2 className="text-white font-black mb-8">
+            Nasze <span className="gradient-text">Rozwiązania.</span>
           </h2>
+          <p className="text-xl text-white/40 max-w-2xl font-light">
+            Projektujemy systemy, które nie tylko automatyzują, ale realnie zwiększają zysk Twojej firmy.
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[1px] bg-white/5 border border-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <BentoCard 
             icon={Bot}
             title="AI Voice Agents"
-            description="Konwersacyjne systemy głosowe o bezbłędnej polszczyźnie. Pełna automatyzacja infolinii."
+            description="Autonomiczni agenci głosowi, którzy brzmią jak człowiek i przejmują 100% połączeń."
           />
           <BentoCard 
             icon={Zap}
             title="Speed-to-Lead"
-            description="Reakcja na kontakt w czasie rzeczywistym. Eliminujemy czas oczekiwania klienta."
+            description="Kontakt z nowym klientem w mniej niż 30 sekund od zapytania."
           />
           <BentoCard 
             icon={Target}
             title="AI Recruitment"
-            description="Inteligentny screening fachowców. Pozyskujemy talenty, gdy inni ich szukają."
+            description="Automatyczny screening i wywiady z kandydatami do pracy."
           />
           <BentoCard 
             icon={BarChart3}
             title="Database Recovery"
-            description="Ekstrakcja wartości z zapomnianych baz danych. Nowy zysk bez nowych kosztów."
+            description="Inteligentne budzenie starych baz danych i odzyskiwanie sprzedaży."
           />
         </div>
       </div>
