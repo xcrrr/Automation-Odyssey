@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Phone, ArrowRight } from 'lucide-react';
+import { Phone, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { QuantumCore } from './QuantumCore';
 
 export const Hero: React.FC = () => {
@@ -14,46 +14,60 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full bg-[#020202] pt-28 pb-16 md:pt-40 md:pb-32 overflow-hidden">
-      {/* Background radial glow */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(0,212,255,0.05),transparent_70%)] pointer-events-none"></div>
+    <section className="relative w-full bg-[#020202] pt-32 pb-20 md:pt-48 md:pb-40 overflow-hidden">
+      {/* Background soft lighting */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(0,212,255,0.08),transparent_70%)] pointer-events-none"></div>
       
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-16">
           
-          {/* Text Content */}
-          <div className={`w-full lg:w-1/2 text-left transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-[10px] md:text-xs font-bold uppercase tracking-widest mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-              Lider Automatyzacji AI
+          {/* Content side */}
+          <div className={`w-full lg:w-3/5 text-left transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-primary text-xs font-bold uppercase tracking-[0.2em] mb-8">
+              Lider Automatyzacji AI • Szczecin
             </div>
             
-            <h1 className="text-white mb-6">
-              Automatyzacja,<br />
-              <span className="gradient-text italic">Która Zarabia.</span>
+            <h1 className="text-white font-black leading-[1.1] mb-8 text-[clamp(2.5rem,7vw,5.5rem)] tracking-tight">
+              Twoja Firma na <br />
+              <span className="gradient-text italic">Autopilocie.</span>
             </h1>
             
-            <p className="text-base md:text-xl text-white/50 font-light leading-relaxed max-w-lg mb-10">
-              Wdrażamy inteligentne voiceboty i systemy Speed-to-Lead. Pozwól AI przejąć rutynowe zadania, podczas gdy Ty skupiasz się na strategii.
+            <p className="text-lg md:text-xl text-white/50 font-light leading-relaxed max-w-2xl mb-12">
+              Projektujemy i wdrażamy autonomiczne systemy AI dla branży usługowej. Głosowi agenci, rekrutacja i obsługa leadów 24/7.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
+            <div className="flex flex-col sm:flex-row gap-6 mb-16">
               <button 
                   onClick={handleBookingClick} 
-                  className="btn-luxury"
+                  className="btn-luxury px-10 py-5 text-lg"
               >
-                Umów Konsultację
-                <ArrowRight size={18} className="ml-2" />
+                Rozpocznij Projekt
+                <ArrowRight size={20} className="ml-3" />
               </button>
-              <a href="tel:+48729086144" className="flex items-center justify-center gap-3 px-6 py-3 md:px-8 md:py-4 rounded-full border border-white/10 text-white font-bold text-sm uppercase tracking-widest hover:bg-white/5 transition-all">
-                <Phone size={16} className="text-primary" />
-                Infolinia AI
+              <a href="tel:+48729086144" className="flex items-center justify-center gap-3 px-10 py-5 rounded-full border border-white/10 text-white font-bold text-sm uppercase tracking-widest hover:bg-white/5 transition-all">
+                <Phone size={18} className="text-primary" />
+                AI Hotline
               </a>
+            </div>
+
+            <div className="flex flex-wrap gap-8 opacity-40">
+               <div className="flex items-center gap-2">
+                  <CheckCircle2 size={16} />
+                  <span className="text-xs uppercase font-bold tracking-widest">Voiceboty</span>
+               </div>
+               <div className="flex items-center gap-2">
+                  <CheckCircle2 size={16} />
+                  <span className="text-xs uppercase font-bold tracking-widest">Rekrutacja AI</span>
+               </div>
+               <div className="flex items-center gap-2">
+                  <CheckCircle2 size={16} />
+                  <span className="text-xs uppercase font-bold tracking-widest">Lead Recovery</span>
+               </div>
             </div>
           </div>
 
-          {/* Visual Content (The Galaxy) */}
-          <div className={`w-full lg:w-1/2 flex items-center justify-center transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+          {/* Visual side */}
+          <div className={`w-full lg:w-2/5 flex items-center justify-center transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
              <QuantumCore />
           </div>
 

@@ -1,86 +1,26 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 export const QuantumCore: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Use a fixed virtual coordinate system for the drawing logic
-    const SIZE = 800;
-    canvas.width = SIZE;
-    canvas.height = SIZE;
-    
-    const particles: any[] = [];
-    for(let i=0; i<100; i++) {
-      particles.push({
-        angle: Math.random() * Math.PI * 2,
-        radius: 100 + Math.random() * 200,
-        speed: 0.002 + Math.random() * 0.005,
-        size: 1 + Math.random() * 3,
-        color: Math.random() > 0.5 ? '#00d4ff' : '#6366f1'
-      });
-    }
-
-    let time = 0;
-    const animate = () => {
-      time += 0.01;
-      ctx.fillStyle = '#020202';
-      ctx.fillRect(0, 0, SIZE, SIZE);
-
-      // Central Glow
-      const grad = ctx.createRadialGradient(SIZE/2, SIZE/2, 0, SIZE/2, SIZE/2, 300);
-      grad.addColorStop(0, 'rgba(0, 212, 255, 0.3)');
-      grad.addColorStop(1, 'transparent');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(SIZE/2, SIZE/2, 300, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Particles
-      particles.forEach(p => {
-        p.angle += p.speed;
-        const x = SIZE/2 + Math.cos(p.angle) * p.radius;
-        const y = SIZE/2 + Math.sin(p.angle) * p.radius * 0.6;
-        
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(x, y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-        
-        // Add a small trail
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = p.color;
-      });
-
-      // Core Orb
-      const core = ctx.createRadialGradient(SIZE/2 - 20, SIZE/2 - 20, 10, SIZE/2, SIZE/2, 100);
-      core.addColorStop(0, '#ffffff');
-      core.addColorStop(0.5, '#00d4ff');
-      core.addColorStop(1, '#020202');
-      ctx.fillStyle = core;
-      ctx.shadowBlur = 0;
-      ctx.beginPath();
-      ctx.arc(SIZE/2, SIZE/2, 100, 0, Math.PI * 2);
-      ctx.fill();
-
-      requestAnimationFrame(animate);
-    };
-
-    animate();
-  }, []);
-
   return (
-    <div className="relative w-full max-w-[300px] md:max-w-[500px] aspect-square mx-auto">
-      {/* Heavy blurred background glow to ensure visibility */}
-      <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full"></div>
-      <canvas 
-        ref={canvasRef} 
-        className="relative z-10 w-full h-full block"
-      />
+    <div className="relative flex items-center justify-center w-full max-w-[300px] md:max-w-[500px] aspect-square mx-auto">
+      {/* Dynamic Glow Layer */}
+      <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full animate-pulse"></div>
+      
+      {/* The Core - Abstract Glass Geometry */}
+      <div className="relative w-40 h-40 md:w-64 md:h-64 group">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-3xl border border-white/20 rounded-3xl rotate-12 transition-transform duration-1000 group-hover:rotate-45"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-secondary/30 backdrop-blur-2xl border border-white/10 rounded-3xl -rotate-12 transition-transform duration-1000 group-hover:-rotate-12 group-hover:scale-110"></div>
+        
+        {/* Floating Inner Orb */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-20 h-20 md:w-32 md:h-32 bg-white rounded-full blur-2xl opacity-20 animate-pulse"></div>
+          <div className="w-12 h-12 md:w-20 md:h-20 bg-gradient-to-br from-white to-primary rounded-full shadow-[0_0_50px_rgba(0,212,255,0.5)]"></div>
+        </div>
+      </div>
+
+      {/* Atmospheric Orbitals */}
+      <div className="absolute w-[120%] h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent rotate-45"></div>
+      <div className="absolute w-[120%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent -rotate-45"></div>
     </div>
   );
 };
