@@ -37,7 +37,7 @@ export const FAQ: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-24 md:py-40 bg-[#050505] relative overflow-hidden">
+    <section id="faq" className="py-24 md:py-40 bg-[#030308] relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center text-center mb-16 md:mb-20">
           <div className="p-2 md:p-3 rounded-2xl bg-white/5 border border-white/10 mb-4 md:mb-6">

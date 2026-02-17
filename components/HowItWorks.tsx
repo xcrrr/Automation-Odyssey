@@ -30,13 +30,19 @@ const steps: Step[] = [
 ];
 
 export const HowItWorks: React.FC = () => {
+  const handleBookingClick = () => {
+    if (window.Cal) {
+      window.Cal("ui", "open", { calLink: "automationodyssey.pl/konsultacja-ai" });
+    } else {
+      window.open("https://cal.com/automationodyssey.pl/konsultacja-ai", "_blank");
+    }
+  };
+
   return (
-    <section id="how-it-works" className="py-24 md:py-40 bg-[#030303] relative overflow-hidden">
-      {/* Cinematic Background Lines */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-primary via-transparent to-transparent"></div>
-        <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-secondary via-transparent to-transparent"></div>
-      </div>
+    <section id="how-it-works" className="py-24 md:py-40 bg-[#080505] relative overflow-hidden">
+      {/* Background Glows */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] opacity-20"></div>
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] opacity-20"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-24">
@@ -94,12 +100,12 @@ export const HowItWorks: React.FC = () => {
                  <p className="text-gray-400 text-sm md:text-base font-light">Sprawdź demo głosu na żywo podczas darmowej rozmowy.</p>
               </div>
            </div>
-           <a 
-            href="#pricing" 
+           <button 
+            onClick={handleBookingClick}
             className="px-8 md:px-10 py-3.5 md:py-4 bg-white text-black rounded-full font-black text-xs md:text-sm uppercase tracking-[0.2em] hover:bg-primary hover:text-white transition-all duration-300 shadow-2xl w-full md:w-auto text-center"
            >
-            Wybierz Plan
-           </a>
+            Umów Konsultację
+           </button>
         </div>
       </div>
     </section>

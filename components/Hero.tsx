@@ -123,14 +123,14 @@ export const Hero: React.FC = () => {
             <button 
               type="button"
               onClick={handleBookingClick}
-              className="group relative px-8 py-4 bg-white text-black rounded-full font-bold text-lg overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)] w-full sm:w-auto"
+              className="group relative px-10 py-5 bg-white text-black rounded-full font-black text-lg tracking-widest uppercase overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_0_50px_rgba(255,255,255,0.15)] w-full sm:w-auto"
             >
-              <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity"></div>
-              <span className="relative z-10">Zacznij Odyseję</span>
+              <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity"></div>
+              <span className="relative z-10">Bezpłatna Konsultacja</span>
             </button>
             <a 
               href="tel:+48729086144" 
-              className="px-8 py-4 bg-transparent border border-white/20 rounded-full font-bold text-lg text-white hover:bg-white/5 hover:border-white/40 transition-all duration-300 backdrop-blur-md flex items-center justify-center gap-3 group w-full sm:w-auto"
+              className="px-10 py-5 bg-transparent border border-white/10 rounded-full font-black text-lg tracking-widest uppercase text-white hover:bg-white/5 hover:border-white/30 transition-all duration-500 backdrop-blur-md flex items-center justify-center gap-3 group w-full sm:w-auto"
             >
               <Phone size={18} className="text-primary group-hover:rotate-12 transition-transform" />
               <span>Zadzwoń do AI</span>
@@ -145,24 +145,37 @@ export const Hero: React.FC = () => {
             style={{ transform: `rotateX(${mousePos.y * -0.2}deg) rotateY(${mousePos.x * 0.2}deg)` }}
            >
               {/* Massive Outer Halo */}
-              <div className="absolute w-[90%] md:w-[80%] h-[90%] md:h-[80%] rounded-full border border-primary/10 animate-[spin_30s_linear_infinite] opacity-30"></div>
-              <div className="absolute w-[70%] md:w-[60%] h-[70%] md:h-[60%] rounded-full border border-secondary/10 animate-[spin_20s_linear_infinite_reverse] opacity-20"></div>
+              <div className="absolute w-[95%] md:w-[85%] h-[95%] md:h-[85%] rounded-full border border-primary/5 animate-[spin_40s_linear_infinite] opacity-30"></div>
+              <div className="absolute w-[75%] md:w-[65%] h-[75%] md:h-[65%] rounded-full border border-secondary/5 animate-[spin_30s_linear_infinite_reverse] opacity-20"></div>
 
-              {/* Main Core Cylinder */}
-              <div className="relative w-48 h-48 md:w-80 md:h-80 group">
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary via-secondary to-accent opacity-20 blur-[40px] md:blur-[60px] group-hover:opacity-40 transition-opacity duration-1000 animate-pulse"></div>
+              {/* Quantum Core Visual */}
+              <div className="relative w-56 h-56 md:w-80 md:h-80 group">
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary via-secondary to-accent opacity-30 blur-[50px] md:blur-[80px] group-hover:opacity-60 transition-opacity duration-1000 animate-pulse"></div>
                 
-                {/* Floating Glass Panels */}
-                <div className="absolute -inset-6 md:-inset-10 border border-white/10 rounded-full backdrop-blur-[2px] animate-[spin_15s_linear_infinite] opacity-50"></div>
-                <div className="absolute -inset-12 md:-inset-20 border border-white/5 rounded-full backdrop-blur-[1px] animate-[spin_25s_linear_infinite_reverse] opacity-30"></div>
+                {/* Rotating Geometric Rings */}
+                <div className="absolute -inset-4 md:-inset-8 border-t border-white/20 rounded-full animate-[spin_10s_linear_infinite] opacity-40"></div>
+                <div className="absolute -inset-8 md:-inset-16 border-r border-white/10 rounded-full animate-[spin_15s_linear_infinite_reverse] opacity-20"></div>
 
-                <div className="relative w-full h-full bg-[#050505] rounded-full border border-white/10 flex items-center justify-center shadow-2xl overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,212,255,0.1),transparent_70%)]"></div>
-                  <Bot className="text-white drop-shadow-[0_0_20px_rgba(0,212,255,0.5)] animate-float w-12 h-12 md:w-20 md:h-20" />
+                <div className="relative w-full h-full bg-[#050505] rounded-full border border-white/20 flex items-center justify-center shadow-[0_0_100px_rgba(0,212,255,0.1)] overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,212,255,0.15),transparent_75%)]"></div>
                   
-                  {/* Energy Rings */}
-                  <div className="absolute inset-4 rounded-full border-2 border-primary/40 animate-pulse shadow-[inset_0_0_20px_rgba(0,212,255,0.2)]"></div>
-                  <div className="absolute inset-8 rounded-full border border-white/10 animate-[spin_4s_linear_infinite]"></div>
+                  {/* Abstract Core Icon - Nanobanana style */}
+                  <div className="relative w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl animate-pulse"></div>
+                    <div className="relative w-full h-full border-4 border-white/80 rounded-full shadow-[0_0_30px_rgba(255,255,255,0.5)] flex items-center justify-center overflow-hidden">
+                       <div className="w-full h-2 bg-white absolute top-1/2 -translate-y-1/2 animate-[spin_2s_linear_infinite]"></div>
+                       <div className="w-2 h-full bg-white absolute left-1/2 -translate-x-1/2 animate-[spin_3s_linear_infinite]"></div>
+                       <div className="absolute inset-2 bg-black rounded-full flex items-center justify-center">
+                          <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-white to-gray-400 rounded-full animate-float shadow-inner"></div>
+                       </div>
+                    </div>
+                  </div>
+                  
+                  {/* Neural Activity Scan Line */}
+                  <div className="absolute inset-0 w-full h-px bg-white/20 animate-[scan_4s_ease-in-out_infinite]"></div>
+                  
+                  {/* Energy Pulse Ring */}
+                  <div className="absolute inset-2 rounded-full border border-primary/40 animate-ping opacity-20"></div>
                 </div>
               </div>
 
