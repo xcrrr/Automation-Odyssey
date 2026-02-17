@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Phone, ArrowRight, ShieldCheck, Zap, Globe } from 'lucide-react';
+import { Phone, ArrowRight } from 'lucide-react';
 import { QuantumCore } from './QuantumCore';
 
 export const Hero: React.FC = () => {
@@ -14,65 +14,47 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-24 pb-20 overflow-hidden bg-[#020202]">
-      {/* Cinematic Fog & Lighting */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,rgba(0,212,255,0.1),transparent_70%)]"></div>
+    <section className="relative w-full bg-[#020202] pt-28 pb-16 md:pt-40 md:pb-32 overflow-hidden">
+      {/* Background radial glow */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(0,212,255,0.05),transparent_70%)] pointer-events-none"></div>
       
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-16 xl:gap-24">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           
-          {/* Left: Strategic Content */}
-          <div className={`flex-1 text-left transition-all duration-1000 ease-luxury ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-primary text-[10px] font-bold uppercase tracking-[0.4em] mb-10">
-              <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
-              Autonomous Systems • Szczecin
+          {/* Text Content */}
+          <div className={`w-full lg:w-1/2 text-left transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-[10px] md:text-xs font-bold uppercase tracking-widest mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Lider Automatyzacji AI
             </div>
             
-            <h1 className="text-white font-black leading-[0.9] mb-10 text-5xl md:text-7xl xl:text-8xl tracking-tighter">
-              DESIGNING<br />
-              <span className="gradient-text italic">AUTONOMY.</span>
+            <h1 className="text-white mb-6">
+              Automatyzacja,<br />
+              <span className="gradient-text italic">Która Zarabia.</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-white/40 font-light leading-relaxed max-w-xl mb-12">
-              Transformujemy firmy usługowe w autonomiczne potęgi. Voiceboty, rekrutacja AI i systemy Speed-to-Lead, które pracują, gdy Ty skalujesz biznes.
+            <p className="text-base md:text-xl text-white/50 font-light leading-relaxed max-w-lg mb-10">
+              Wdrażamy inteligentne voiceboty i systemy Speed-to-Lead. Pozwól AI przejąć rutynowe zadania, podczas gdy Ty skupiasz się na strategii.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 mb-16">
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
               <button 
                   onClick={handleBookingClick} 
-                  className="btn-luxury group flex items-center justify-center rounded-full px-10 py-5 bg-white text-black font-bold hover:bg-primary transition-all duration-500"
+                  className="btn-luxury"
               >
-                Rozpocznij Projekt
-                <ArrowRight size={18} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                Umów Konsultację
+                <ArrowRight size={18} className="ml-2" />
               </button>
-              <a href="tel:+48729086144" className="flex items-center justify-center gap-3 px-10 py-5 rounded-full border border-white/10 text-white font-bold text-sm uppercase tracking-widest hover:bg-white/5 transition-all">
+              <a href="tel:+48729086144" className="flex items-center justify-center gap-3 px-6 py-3 md:px-8 md:py-4 rounded-full border border-white/10 text-white font-bold text-sm uppercase tracking-widest hover:bg-white/5 transition-all">
                 <Phone size={16} className="text-primary" />
-                Zadzwoń do AI
+                Infolinia AI
               </a>
-            </div>
-            
-            {/* Trust Badges */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 border-t border-white/5 pt-10">
-               <div className="flex items-center gap-3">
-                  <Zap size={20} className="text-primary opacity-50" />
-                  <span className="text-[11px] text-white/40 uppercase tracking-widest font-bold">&lt;30s Response</span>
-               </div>
-               <div className="flex items-center gap-3">
-                  <ShieldCheck size={20} className="text-primary opacity-50" />
-                  <span className="text-[11px] text-white/40 uppercase tracking-widest font-bold">Safe AI Tech</span>
-               </div>
-               <div className="flex items-center gap-3">
-                  <Globe size={20} className="text-primary opacity-50" />
-                  <span className="text-[11px] text-white/40 uppercase tracking-widest font-bold">Global Ready</span>
-               </div>
             </div>
           </div>
 
-          {/* Right: The Neural Core */}
-          <div className={`flex-1 flex items-center justify-center transition-all duration-1000 delay-300 ease-luxury ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-             <div className="relative w-full max-w-[500px] xl:max-w-[700px] aspect-square">
-                <QuantumCore />
-             </div>
+          {/* Visual Content (The Galaxy) */}
+          <div className={`w-full lg:w-1/2 flex items-center justify-center transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+             <QuantumCore />
           </div>
 
         </div>
