@@ -28,9 +28,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./automation-odyssey-web
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,7 +36,6 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-          cache-dependency-path: './automation-odyssey-web/package-lock.json'
       - name: Install dependencies
         run: npm install
       - name: Build
@@ -50,7 +46,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload dist folder
-          path: './automation-odyssey-web/dist'
+          path: './dist'
           if-no-files-found: error
       - name: Deploy to GitHub Pages
         id: deployment
