@@ -17,11 +17,7 @@ export const Header: React.FC = () => {
   }, []);
 
   const handleBookingClick = () => {
-    if (window.Cal) {
-      window.Cal("ui", "open", { calLink: "automationodyssey.pl/konsultacja-ai" });
-    } else {
-      window.open("https://cal.com/automationodyssey.pl/konsultacja-ai", "_blank");
-    }
+    window.open("https://cal.com/automationodyssey.pl/konsultacja-ai", "_blank");
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {

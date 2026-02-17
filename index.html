@@ -103,34 +103,41 @@
         position: relative;
         background: #ffffff;
         color: #000;
-        font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        padding: 1.25rem 2.5rem;
+        font-weight: 700;
+        text-transform: none;
+        letter-spacing: -0.02em;
+        padding: 1.25rem 3rem;
         border-radius: 9999px;
-        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         overflow: hidden;
-        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
       }
       .btn-luxury:hover {
-        transform: translateY(-4px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 20px 60px rgba(0, 212, 255, 0.25);
       }
       .btn-luxury::after {
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
         transform: translateX(-100%);
-        transition: transform 0.8s ease;
+        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .btn-luxury:hover::after { transform: translateX(100%); }
 
-      @media (max-width: 768px) {
-        html { scroll-padding-top: 80px; }
-        h1 { font-size: 2.8rem !important; line-height: 1 !important; }
-        h2 { font-size: 2.2rem !important; }
-        section { padding-top: 80px !important; padding-bottom: 80px !important; }
+      h1, h2, h3 { 
+        letter-spacing: -0.04em !important; 
+        line-height: 0.9 !important;
+      }
+      
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
       }
     </style>
 <script type="text/javascript">
@@ -138,6 +145,7 @@
   Cal("init", "konsultacja-ai", {origin:"https://app.cal.com"});
   Cal.ns["konsultacja-ai"]("ui", {"theme":"dark","cssVarsPerTheme":{"light":{"cal-brand":"#292929"},"dark":{"cal-brand":"#ffffff"}},"hideEventTypeDetails":false,"layout":"month_view"});
   </script>
+
 
 <script type="importmap">
 {
@@ -149,7 +157,7 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-11eDl-ul.js"></script>
+  <script type="module" crossorigin src="/assets/index-CCBZILfl.js"></script>
 </head>
   <body>
     <div id="root"></div>

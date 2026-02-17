@@ -12,24 +12,46 @@ export const QuantumCore: React.FC = () => {
     let width = canvas.width = 400;
     let height = canvas.height = 400;
     let particles: any[] = [];
-    let angle = 0;
+    let mouse = { x: -1000, y: -1000 };
+
+    window.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
 
     class Particle {
       x: number; y: number; r: number; color: string; speed: number; orbit: number;
+      baseX: number; baseY: number;
+      angle: number;
+      
       constructor() {
         this.orbit = Math.random() * 150 + 50;
-        this.x = width / 2;
-        this.y = height / 2;
+        this.angle = Math.random() * Math.PI * 2;
+        this.x = width / 2 + Math.cos(this.angle) * this.orbit;
+        this.y = height / 2 + Math.sin(this.angle) * this.orbit * 0.6;
         this.r = Math.random() * 2 + 0.5;
         this.color = Math.random() > 0.5 ? '#00d4ff' : '#6366f1';
-        this.speed = Math.random() * 0.02 + 0.005;
-        this.angle = Math.random() * Math.PI * 2;
+        this.speed = Math.random() * 0.01 + 0.005;
       }
-      angle: number;
+
       update() {
         this.angle += this.speed;
-        this.x = width / 2 + Math.cos(this.angle) * this.orbit;
-        this.y = height / 2 + Math.sin(this.angle) * this.orbit * 0.6; // Ellipse
+        const targetX = width / 2 + Math.cos(this.angle) * this.orbit;
+        const targetY = height / 2 + Math.sin(this.angle) * this.orbit * 0.6;
+        
+        // Interaction
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 80) {
+          this.x -= dx / 10;
+          this.y -= dy / 10;
+        } else {
+          this.x += (targetX - this.x) * 0.05;
+          this.y += (targetY - this.y) * 0.05;
+        }
       }
       draw() {
         if (!ctx) return;
