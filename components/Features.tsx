@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Bot, Zap, Target, BarChart3, Clock, Users } from 'lucide-react';
+import { Bot, Zap, Target, BarChart3, ChevronRight } from 'lucide-react';
 
 const BentoCard = ({ icon: Icon, title, description, className = "", accentColor = "rgba(0, 212, 255, 0.15)" }: { icon: any, title: string, description: string, className?: string, accentColor?: string }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -15,20 +15,28 @@ const BentoCard = ({ icon: Icon, title, description, className = "", accentColor
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className={`relative group bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-10 overflow-hidden transition-all duration-700 ease-luxury hover:bg-white/[0.04] hover:border-white/10 ${className}`}
+      className={`relative group bg-[#080808] border border-white/[0.03] rounded-[3rem] p-12 overflow-hidden transition-all duration-1000 ease-luxury hover:border-white/[0.08] ${className}`}
     >
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-1000 group-hover:opacity-100"
         style={{
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${accentColor}, transparent 40%)`,
+          background: `radial-gradient(800px circle at ${position.x}px ${position.y}px, ${accentColor}, transparent 40%)`,
         }}
       />
-      <div className="relative z-10">
-        <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/5 group-hover:scale-110 transition-transform duration-700 ease-luxury">
-          <Icon className="text-white" size={28} />
+      
+      <div className="relative z-10 h-full flex flex-col justify-between">
+        <div>
+            <div className="w-16 h-16 bg-white/[0.02] border border-white/5 rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 group-hover:bg-white/[0.05] transition-all duration-700 ease-luxury">
+              <Icon className="text-white" size={32} />
+            </div>
+            <h3 className="text-3xl md:text-4xl font-bold mb-6 tracking-tighter text-white group-hover:translate-x-2 transition-transform duration-700">{title}</h3>
+            <p className="text-white/40 leading-relaxed text-xl font-light max-w-sm">{description}</p>
         </div>
-        <h3 className="text-2xl md:text-3xl font-bold mb-4 tracking-tighter text-white">{title}</h3>
-        <p className="text-gray-500 leading-relaxed text-lg font-light">{description}</p>
+        
+        <div className="mt-12 flex items-center gap-2 text-white/20 group-hover:text-primary transition-colors duration-500">
+           <span className="text-xs font-bold uppercase tracking-[0.3em]">Discovery</span>
+           <ChevronRight size={14} />
+        </div>
       </div>
     </div>
   );
@@ -36,47 +44,45 @@ const BentoCard = ({ icon: Icon, title, description, className = "", accentColor
 
 export const Features: React.FC = () => {
   return (
-    <section id="features" className="py-32 md:py-48 px-6 bg-[#020205] relative overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
-      
+    <section id="features" className="py-40 md:py-64 px-6 bg-[#020202] relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="max-w-3xl mb-24">
-          <h2 className="text-5xl md:text-8xl font-black mb-8 tracking-tighter leading-[0.9]">
-            SYSTEMY <br />
-            <span className="gradient-text italic">AUTONOMICZNE</span>
+        <div className="max-w-4xl mb-32">
+          <div className="text-primary text-xs font-bold uppercase tracking-[0.4em] mb-6">Capabilities</div>
+          <h2 className="text-6xl md:text-[9rem] font-black mb-12 tracking-tighter leading-[0.8] text-white">
+            UNMATCHED <br />
+            <span className="text-white/10">INTELLIGENCE.</span>
           </h2>
-          <p className="text-xl md:text-2xl text-gray-500 font-light leading-relaxed">
-            Eliminujemy ludzkie błędy i wąskie gardła. Wdrażamy AI tam, gdzie liczy się precyzja, czas i bezwzględna skuteczność.
+          <p className="text-2xl md:text-3xl text-white/30 font-light leading-relaxed max-w-2xl">
+            Odchodzimy od prostych automatyzacji. Budujemy ekosystemy, które ewoluują wraz z Twoim biznesem.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <BentoCard 
             icon={Bot}
             title="AI Voice Agents"
-            description="Pełna obsługa połączeń przychodzących i wychodzących. Brzmią jak człowiek, myślą jak ekspert."
+            description="Agenci głosowi o ludzkim brzmieniu, obsługujący 100% ruchu telefonicznego."
             className="md:col-span-2"
-            accentColor="rgba(0, 212, 255, 0.1)"
+            accentColor="rgba(0, 212, 255, 0.12)"
           />
           <BentoCard 
             icon={Zap}
             title="Speed-to-Lead"
-            description="Kontakt z nowym klientem w < 30 sekund. Reagujemy, zanim klient pomyśli o konkurencji."
-            accentColor="rgba(99, 102, 241, 0.1)"
+            description="Konwersja leadów w czasie rzeczywistym. Reakcja < 30s."
+            accentColor="rgba(99, 102, 241, 0.12)"
           />
           <BentoCard 
-            icon={Users}
+            icon={Target}
             title="AI Recruitment"
-            description="Automatyczny screening i pierwsze wywiady. AI filtruje talenty, Ty podpisujesz umowy."
-            accentColor="rgba(255, 0, 110, 0.05)"
+            description="Autonomiczny screening kandydatów i wywiady wstępne."
+            accentColor="rgba(255, 0, 110, 0.08)"
           />
           <BentoCard 
             icon={BarChart3}
-            title="Database Reactivation"
-            description="Budzimy Twoją martwą bazę klientów. AI identyfikuje szanse sprzedażowe tam, gdzie nikt ich nie widzi."
+            title="Database Recovery"
+            description="Inteligentna reaktywacja uśpionych baz danych klientów."
             className="md:col-span-2"
-            accentColor="rgba(34, 197, 94, 0.1)"
+            accentColor="rgba(34, 197, 94, 0.12)"
           />
         </div>
       </div>
