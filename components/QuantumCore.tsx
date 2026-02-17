@@ -12,89 +12,116 @@ export const QuantumCore: React.FC = () => {
     let width = canvas.width = 800;
     let height = canvas.height = 800;
     
-    const particles: any[] = [];
-    const particleCount = 150;
+    // Neural Threads
+    const threads: Thread[] = [];
+    const threadCount = 40;
     
-    class Particle {
-      x: number; y: number; r: number; color: string; 
-      angle: number; orbit: number; speed: number;
-      opacity: number;
-      
+    class Thread {
+      points: { x: number; y: number }[] = [];
+      seed: number = Math.random() * 1000;
+      color: string;
+      maxLength: number = 20 + Math.random() * 30;
+      angle: number = Math.random() * Math.PI * 2;
+      radius: number = 50 + Math.random() * 150;
+      speed: number = 0.002 + Math.random() * 0.005;
+
       constructor() {
-        this.reset();
-      }
-      
-      reset() {
-        this.orbit = 50 + Math.random() * 150;
-        this.angle = Math.random() * Math.PI * 2;
-        this.speed = 0.005 + Math.random() * 0.01;
-        this.r = 0.5 + Math.random() * 2;
-        this.opacity = 0.1 + Math.random() * 0.5;
         this.color = Math.random() > 0.5 ? '#00d4ff' : '#6366f1';
+        for (let i = 0; i < this.maxLength; i++) {
+          this.points.push({ x: 400, y: 400 });
+        }
       }
-      
-      update() {
+
+      update(time: number) {
         this.angle += this.speed;
-        this.x = 400 + Math.cos(this.angle) * this.orbit;
-        this.y = 400 + Math.sin(this.angle) * this.orbit * 0.6; // Elliptical galaxy
+        
+        // Organic flow using layered sines
+        const noiseX = Math.sin(time * 0.5 + this.seed) * 30;
+        const noiseY = Math.cos(time * 0.3 + this.seed) * 30;
+        
+        const targetX = 400 + Math.cos(this.angle) * this.radius + noiseX;
+        const targetY = 400 + Math.sin(this.angle) * (this.radius * 0.6) + noiseY;
+
+        // Shift points for trail
+        this.points.unshift({ x: targetX, y: targetY });
+        if (this.points.length > this.maxLength) {
+          this.points.pop();
+        }
       }
-      
+
       draw() {
         if (!ctx) return;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = this.opacity;
-        ctx.fill();
+        ctx.moveTo(this.points[0].x, this.points[0].y);
         
-        // Bloom
-        ctx.shadowBlur = 15;
+        for (let i = 1; i < this.points.length; i++) {
+          const p = this.points[i];
+          ctx.lineTo(p.x, p.y);
+        }
+
+        const gradient = ctx.createLinearGradient(
+          this.points[0].x, this.points[0].y,
+          this.points[this.points.length-1].x, this.points[this.points.length-1].y
+        );
+        gradient.addColorStop(0, this.color);
+        gradient.addColorStop(1, 'transparent');
+
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 1.5;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+        
+        // Glow head
+        ctx.shadowBlur = 10;
         ctx.shadowColor = this.color;
       }
     }
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
+    for (let i = 0; i < threadCount; i++) {
+      threads.push(new Thread());
     }
 
+    let time = 0;
     const animate = () => {
-      // Trail effect for smooth motion
-      ctx.fillStyle = 'rgba(2, 2, 2, 0.15)';
+      time += 0.02;
+      
+      // Black background with slight fade for trails
+      ctx.fillStyle = 'rgba(2, 2, 2, 0.2)';
       ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
       ctx.fillRect(0, 0, width, height);
 
-      // 1. Central Singularity (Nebula Glow)
-      const grad = ctx.createRadialGradient(400, 400, 0, 400, 400, 250);
-      grad.addColorStop(0, 'rgba(0, 212, 255, 0.2)');
-      grad.addColorStop(0.4, 'rgba(99, 102, 241, 0.05)');
-      grad.addColorStop(1, 'transparent');
-      
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(400, 400, 250, 0, Math.PI * 2);
-      ctx.fill();
+      // 1. Atmosphere (Ambient Glow)
+      const ambient = ctx.createRadialGradient(400, 400, 0, 400, 400, 300);
+      ambient.addColorStop(0, 'rgba(0, 212, 255, 0.05)');
+      ambient.addColorStop(1, 'transparent');
+      ctx.fillStyle = ambient;
+      ctx.fillRect(0, 0, width, height);
 
-      // 2. Swirling Particles
-      particles.forEach(p => {
-        p.update();
-        p.draw();
+      // 2. Neural Threads (Flowing Silk)
+      threads.forEach(t => {
+        t.update(time);
+        t.draw();
       });
 
-      // 3. Focal Core (Glassy Center)
-      const coreGrad = ctx.createRadialGradient(380, 380, 10, 400, 400, 100);
-      coreGrad.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+      // 3. The Core (High-End Singularity)
+      ctx.shadowBlur = 0;
+      const coreGrad = ctx.createRadialGradient(380, 380, 5, 400, 400, 100);
+      coreGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
       coreGrad.addColorStop(0.2, 'rgba(0, 212, 255, 0.4)');
-      coreGrad.addColorStop(1, 'rgba(2, 2, 2, 0.8)');
+      coreGrad.addColorStop(0.5, 'rgba(99, 102, 241, 0.1)');
+      coreGrad.addColorStop(1, 'rgba(2, 2, 2, 0.9)');
       
-      ctx.globalAlpha = 1;
       ctx.fillStyle = coreGrad;
       ctx.beginPath();
       ctx.arc(400, 400, 100, 0, Math.PI * 2);
       ctx.fill();
       
-      // Rim Light
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-      ctx.lineWidth = 2;
+      // Glass Refraction Rim
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(400, 400, 101, 0, Math.PI * 2);
       ctx.stroke();
 
       requestAnimationFrame(animate);
@@ -104,16 +131,22 @@ export const QuantumCore: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative flex items-center justify-center pointer-events-none">
-       {/* Pure Atmospheric Glow */}
-       <div className="absolute w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-primary/20 rounded-full blur-[120px] mix-blend-screen animate-pulse"></div>
+    <div className="relative flex items-center justify-center pointer-events-none scale-75 md:scale-100">
+       {/* Organic Depth Glow */}
+       <div className="absolute w-[400px] h-[400px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[150px] mix-blend-screen animate-pulse"></div>
        
        <canvas 
         ref={canvasRef} 
         width={800} 
         height={800} 
-        className="relative z-10 w-full h-full max-w-[350px] md:max-w-[700px] mix-blend-screen"
+        className="relative z-10 w-full h-full max-w-[400px] md:max-w-[800px] mix-blend-screen opacity-90"
        />
+       
+       {/* Cinematic HUD Elements */}
+       <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-[105%] h-[105%] border border-white/5 rounded-full animate-[spin_60s_linear_infinite]"></div>
+          <div className="w-[110%] h-[110%] border border-white/[0.02] rounded-full animate-[spin_45s_linear_infinite_reverse]"></div>
+       </div>
     </div>
   );
 };
